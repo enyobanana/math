@@ -180,8 +180,8 @@ export default function ReadingLogPage() {
     );
   }, [logs, searchQuery]);
 
-  // SQL 쿼리문
-  const sqlQueryText = `-- 1. Supabase 독서기록장 테이블 생성 SQL 쿼리
+  // SQL 쿼리문 (Supabase SQL Editor에 실행할 쿼리)
+  const sqlQueryText = `-- 1. Supabase 독서기록장 (reading_logs) 테이블 생성
 CREATE TABLE IF NOT EXISTS public.reading_logs (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   student_id VARCHAR(50) NOT NULL,     -- 학번 (예: 20101)
@@ -193,8 +193,12 @@ CREATE TABLE IF NOT EXISTS public.reading_logs (
   created_at TIMESTAMPTZ DEFAULT NOW() -- 등록 일시
 );
 
--- 2. RLS (행 수준 보안) 설정 및 공개 접근 허용 정책
+-- 2. RLS (행 수준 보안) 설정 및 기존 정책 재설정
 ALTER TABLE public.reading_logs ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow public read access" ON public.reading_logs;
+DROP POLICY IF EXISTS "Allow public insert access" ON public.reading_logs;
+DROP POLICY IF EXISTS "Allow public delete access" ON public.reading_logs;
 
 CREATE POLICY "Allow public read access" ON public.reading_logs
   FOR SELECT USING (true);
@@ -203,7 +207,10 @@ CREATE POLICY "Allow public insert access" ON public.reading_logs
   FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "Allow public delete access" ON public.reading_logs
-  FOR DELETE USING (true);`;
+  FOR DELETE USING (true);
+
+-- 3. Supabase PostgREST API 스키마 캐시 즉시 새로고침
+NOTIFY pgrst, 'reload schema';`;
 
   const copySqlToClipboard = () => {
     navigator.clipboard.writeText(sqlQueryText);
