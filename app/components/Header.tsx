@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { BookOpen, Menu, X, Sparkles, Binary, LineChart, BookMarked } from "lucide-react";
+import { BookOpen, Menu, X, Sparkles, Binary, LineChart, BookMarked, Bot } from "lucide-react";
 
 /**
  * 상단 헤더 네비게이션 컴포넌트
@@ -34,10 +34,17 @@ export default function Header() {
         {/* 2. PC 네비게이션 바 */}
         <nav className="hidden items-center gap-7 md:flex">
           <Link
-            href="/reading-log"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700"
+            href="/math-chat"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700"
           >
-            <BookMarked className="h-4 w-4" />
+            <Bot className="h-4 w-4" />
+            AI 수학 챗봇
+          </Link>
+          <Link
+            href="/reading-log"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-600"
+          >
+            <BookMarked className="h-4 w-4 text-blue-600" />
             독서기록장
           </Link>
           <Link
@@ -59,11 +66,11 @@ export default function Header() {
         {/* 3. 우측 액션 버튼 */}
         <div className="hidden md:flex md:items-center md:gap-3">
           <Link
-            href="/reading-log"
-            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md active:scale-95"
+            href="/math-chat"
+            className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-blue-500 hover:shadow-md active:scale-95"
           >
-            <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-            독서기록장 작성
+            <Bot className="h-3.5 w-3.5 text-blue-100" />
+            AI 수학 선생님 질문하기
           </Link>
         </div>
 
@@ -89,9 +96,17 @@ export default function Header() {
         <div className="border-b border-gray-200/80 bg-white/95 px-6 py-4 backdrop-blur-lg md:hidden">
           <nav className="flex flex-col gap-4">
             <Link
+              href="/math-chat"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-2"
+            >
+              <Bot className="h-4 w-4" />
+              🤖 AI 수학 챗봇
+            </Link>
+            <Link
               href="/reading-log"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-sm font-bold text-blue-600 hover:text-blue-700"
+              className="text-sm font-bold text-slate-700 hover:text-blue-600"
             >
               📚 독서기록장 (Supabase DB)
             </Link>
@@ -110,11 +125,11 @@ export default function Header() {
               🧪 에라토스테네스의 체
             </Link>
             <Link
-              href="/reading-log"
+              href="/math-chat"
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 w-full rounded-full bg-blue-600 py-3 text-center text-xs font-semibold text-white shadow-sm"
             >
-              독서기록장 바로가기
+              AI 수학 선생님에게 질문하기
             </Link>
           </nav>
         </div>
