@@ -281,35 +281,44 @@ export default function QuadraticPage() {
                   <span className="font-bold text-slate-800">(0, {yIntercept.toFixed(1)})</span>
                 </div>
 
-                <div className="flex flex-col gap-1 rounded-xl bg-white/80 px-3 py-2.5 border border-blue-100/50">
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-slate-500">x절편 (x-Intercepts):</span>
+                <div className="flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 border border-blue-100/50">
+                  <span className="font-semibold text-slate-500">x절편 (x-Intercepts):</span>
+                  <span className="font-bold text-slate-800">
+                    {roots === null
+                      ? "N/A"
+                      : roots.length === 0
+                      ? "실근 없음"
+                      : roots.length === 1
+                      ? `(${roots[0].toFixed(1)}, 0)`
+                      : `(${roots[0].toFixed(1)}, 0), (${roots[1].toFixed(1)}, 0)`}
+                  </span>
+                </div>
+
+                {a !== 0 && (
+                  <div className="flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 border border-blue-100/50">
+                    <span className="font-semibold text-slate-500">판별식 (D = b²-4ac):</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-800">
-                        {roots === null
-                          ? "N/A"
-                          : roots.length === 0
-                          ? "실근 없음"
-                          : roots.length === 1
-                          ? `(${roots[0].toFixed(1)}, 0)`
-                          : `(${roots[0].toFixed(1)}, 0), (${roots[1].toFixed(1)}, 0)`}
+                      <span className="font-bold font-mono text-slate-900">
+                        D = {discriminantFormatted}
                       </span>
-                      {a !== 0 && (
-                        <span
-                          className={`inline-flex items-center rounded-lg px-2 py-0.5 text-[11px] font-extrabold font-mono shadow-xs ${
-                            discriminant > 0
-                              ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                              : discriminant === 0
-                              ? "bg-amber-100 text-amber-800 border border-amber-200"
-                              : "bg-rose-100 text-rose-800 border border-rose-200"
-                          }`}
-                        >
-                          D = {discriminantFormatted} ({discriminant > 0 ? "D > 0" : discriminant === 0 ? "D = 0" : "D < 0"})
-                        </span>
-                      )}
+                      <span
+                        className={`inline-flex items-center rounded-md px-2 py-0.5 text-[10px] font-bold font-mono ${
+                          discriminant > 0
+                            ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                            : discriminant === 0
+                            ? "bg-amber-100 text-amber-800 border border-amber-200"
+                            : "bg-rose-100 text-rose-800 border border-rose-200"
+                        }`}
+                      >
+                        {discriminant > 0
+                          ? "D > 0 (실근 2개)"
+                          : discriminant === 0
+                          ? "D = 0 (중근 1개)"
+                          : "D < 0 (실근 0개)"}
+                      </span>
                     </div>
                   </div>
-                </div>
+                )}
 
                 <div className="flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 border border-blue-100/50">
                   <span className="font-semibold text-slate-500">그래프 모양:</span>
