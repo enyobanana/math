@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Plus, Sparkles, CheckCircle2, ArrowRight, Binary, LineChart, BookMarked, Bot } from "lucide-react";
+import { Plus, Sparkles, CheckCircle2, ArrowRight, Binary, LineChart, BookMarked, Bot, CircleDot } from "lucide-react";
 
 /**
  * 메인 페이지 컴포넌트 (Hero Section 및 뼈대 카드)
  * - 애플(Apple) 감성의 넓은 여백과 부드러운 라운딩 적용
- * - AI 수학 챗봇 (OpenAI 연동), 학생 독서기록장, 에라토스테네스의 체, 이차함수 그래프 진입 버튼 포함
+ * - AI 수학 챗봇 (OpenAI 연동), 원의 방정식, 학생 독서기록장, 에라토스테네스의 체, 이차함수 그래프 진입 버튼 포함
  */
 export default function HomePage() {
   const [clickCount, setClickCount] = useState<number>(0);
@@ -46,11 +46,11 @@ export default function HomePage() {
 
           {/* 설명 문구 */}
           <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed text-slate-600 md:text-lg">
-            AI 수학 선생님과의 1:1 대화, 학생 독서기록장, 에라토스테네스의 체, 이차함수 그래프 시뮬레이션을 한 곳에서 체험해 보세요!
+            AI 수학 선생님과의 1:1 대화, 원의 방정식 시각화, 학생 독서기록장, 에라토스테네스의 체, 이차함수 그래프 시뮬레이션을 한 곳에서 체험해 보세요!
           </p>
 
           {/* 메인 버튼 액션 구역 */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             
             {/* [메인 진입 버튼 1] AI 수학 챗봇 (OpenAI) */}
             <Link
@@ -62,7 +62,16 @@ export default function HomePage() {
               <ArrowRight className="h-4 w-4 text-blue-200 transition-transform group-hover:translate-x-1" />
             </Link>
 
-            {/* [메인 진입 버튼 2] 학생 독서기록장 */}
+            {/* [메인 진입 버튼 2] 원의 방정식 */}
+            <Link
+              href="/circle"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-6 py-3.5 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur-sm transition-all hover:bg-blue-100 hover:shadow-md active:scale-95"
+            >
+              <CircleDot className="h-4 w-4 text-blue-600" />
+              <span>원의 방정식</span>
+            </Link>
+
+            {/* [메인 진입 버튼 3] 학생 독서기록장 */}
             <Link
               href="/reading-log"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/90 px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur-sm transition-all hover:bg-white hover:text-blue-600 hover:shadow-md active:scale-95"
@@ -71,7 +80,7 @@ export default function HomePage() {
               <span>학생 독서기록장</span>
             </Link>
 
-            {/* [메인 진입 버튼 3] 이차함수 그래프 */}
+            {/* [메인 진입 버튼 4] 이차함수 그래프 */}
             <Link
               href="/quadratic"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/60 px-5 py-3.5 text-sm font-semibold text-slate-600 shadow-xs backdrop-blur-sm transition-all hover:bg-white hover:text-blue-600"
@@ -93,33 +102,33 @@ export default function HomePage() {
         {/* =========================================================================
             2. 특징 및 확장성 안내 카드
             ========================================================================= */}
-        <section className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <section className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           
-          {/* 카드 1: AI 수학 챗봇 */}
+          {/* 카드 1: 원의 방정식 시각화 */}
           <Link
-            href="/math-chat"
+            href="/circle"
             className="group rounded-3xl border border-blue-200/80 bg-white/90 p-8 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
           >
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm shadow-blue-500/20 transition-transform group-hover:scale-110">
+              <CircleDot className="h-6 w-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900">원의 방정식 🔴</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              중심 좌표 $(h, k)$와 반지름 $r$에 따른 원의 방정식 $(x-h)^2 + (y-k)^2 = r^2$과 둘레/넓이/절편을 좌표평면에 실시간 시각화합니다.
+            </p>
+          </Link>
+
+          {/* 카드 2: AI 수학 챗봇 */}
+          <Link
+            href="/math-chat"
+            className="group rounded-3xl border border-gray-200/70 bg-white/80 p-8 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl"
+          >
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
               <Bot className="h-6 w-6" />
             </div>
             <h3 className="text-lg font-bold text-slate-900">AI 수학 챗봇 🤖</h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-600">
               환경변수 `openai_api_key` 기반의 AI 수학 선생님이 학생들의 수학 질문에 풀이 과정을 단계별로 친절하게 설명합니다.
-            </p>
-          </Link>
-
-          {/* 카드 2: 독서기록장 (Supabase) */}
-          <Link
-            href="/reading-log"
-            className="group rounded-3xl border border-gray-200/70 bg-white/80 p-8 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl"
-          >
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
-              <BookMarked className="h-6 w-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900">학생 독서기록장 📚</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              학번, 이름, 날짜, 책이름, 저자, 새롭게 알게된 점을 기록하고 Supabase DB에 영구 저장합니다.
             </p>
           </Link>
 
@@ -137,7 +146,21 @@ export default function HomePage() {
             </p>
           </Link>
 
-          {/* 카드 4: 에라토스테네스의 체 실험 */}
+          {/* 카드 4: 독서기록장 (Supabase) */}
+          <Link
+            href="/reading-log"
+            className="group rounded-3xl border border-gray-200/70 bg-white/80 p-8 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl"
+          >
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 transition-colors group-hover:bg-slate-700 group-hover:text-white">
+              <BookMarked className="h-6 w-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900">학생 독서기록장 📚</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              학번, 이름, 날짜, 책이름, 저자, 새롭게 알게된 점을 기록하고 Supabase DB에 영구 저장합니다.
+            </p>
+          </Link>
+
+          {/* 카드 5: 에라토스테네스의 체 실험 */}
           <Link
             href="/sieve"
             className="group rounded-3xl border border-gray-200/70 bg-white/80 p-8 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-xl"
@@ -157,3 +180,4 @@ export default function HomePage() {
     </div>
   );
 }
+

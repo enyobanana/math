@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { BookOpen, Menu, X, Sparkles, Binary, LineChart, BookMarked, Bot } from "lucide-react";
+import { BookOpen, Menu, X, Sparkles, Binary, LineChart, BookMarked, Bot, CircleDot } from "lucide-react";
 
 /**
  * 상단 헤더 네비게이션 컴포넌트
@@ -39,6 +39,13 @@ export default function Header() {
           >
             <Bot className="h-4 w-4" />
             AI 수학 챗봇
+          </Link>
+          <Link
+            href="/circle"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-600"
+          >
+            <CircleDot className="h-4 w-4 text-blue-600" />
+            원의 방정식
           </Link>
           <Link
             href="/reading-log"
@@ -102,6 +109,14 @@ export default function Header() {
             >
               <Bot className="h-4 w-4" />
               🤖 AI 수학 챗봇
+            </Link>
+            <Link
+              href="/circle"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-sm font-bold text-slate-700 hover:text-blue-600 flex items-center gap-2"
+            >
+              <CircleDot className="h-4 w-4 text-blue-600" />
+              🔴 원의 방정식
             </Link>
             <Link
               href="/reading-log"
