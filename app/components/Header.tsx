@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { BookOpen, Menu, X, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { BookOpen, Menu, X, Sparkles, Binary } from "lucide-react";
 
 /**
  * 상단 헤더 네비게이션 컴포넌트
@@ -16,7 +17,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
         
         {/* 1. 서비스 로고 영역 (himath) */}
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm shadow-blue-500/20">
             <BookOpen className="h-5 w-5" />
           </div>
@@ -28,40 +29,40 @@ export default function Header() {
               Edu Platform
             </span>
           </div>
-        </div>
+        </Link>
 
         {/* 2. PC 네비게이션 바 */}
         <nav className="hidden items-center gap-8 md:flex">
+          <Link
+            href="/sieve"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700"
+          >
+            <Binary className="h-4 w-4" />
+            에라토스테네스의 체
+          </Link>
           <a
-            href="#features"
+            href="/#features"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
           >
             소개
           </a>
           <a
-            href="#guide"
+            href="/#guide"
             className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
           >
             선생님 가이드
-          </a>
-          <a
-            href="#curriculum"
-            className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
-          >
-            수학 커리큘럼
           </a>
         </nav>
 
         {/* 3. 우측 액션 버튼 (시작하기) */}
         <div className="hidden md:flex md:items-center md:gap-3">
-          <button
-            type="button"
-            onClick={() => alert("himath 서비스에 오신 것을 환영합니다!")}
+          <Link
+            href="/sieve"
             className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md active:scale-95"
           >
             <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-            시작하기
-          </button>
+            실험실 진입하기
+          </Link>
         </div>
 
         {/* 4. 모바일 메뉴 토글 버튼 */}
@@ -85,37 +86,34 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="border-b border-gray-200/80 bg-white/95 px-6 py-4 backdrop-blur-lg md:hidden">
           <nav className="flex flex-col gap-4">
+            <Link
+              href="/sieve"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-sm font-bold text-blue-600 hover:text-blue-700"
+            >
+              🧪 에라토스테네스의 체
+            </Link>
             <a
-              href="#features"
+              href="/#features"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-sm font-medium text-slate-700 hover:text-blue-600"
             >
               소개
             </a>
             <a
-              href="#guide"
+              href="/#guide"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-sm font-medium text-slate-700 hover:text-blue-600"
             >
               선생님 가이드
             </a>
-            <a
-              href="#curriculum"
+            <Link
+              href="/sieve"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-sm font-medium text-slate-700 hover:text-blue-600"
-            >
-              수학 커리큘럼
-            </a>
-            <button
-              type="button"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                alert("himath 서비스에 오신 것을 환영합니다!");
-              }}
               className="mt-2 w-full rounded-full bg-blue-600 py-3 text-center text-xs font-semibold text-white shadow-sm"
             >
-              시작하기
-            </button>
+              실험실 진입하기
+            </Link>
           </nav>
         </div>
       )}
