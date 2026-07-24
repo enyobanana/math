@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { BookOpen, Menu, X, Sparkles, Binary, LineChart } from "lucide-react";
+import { BookOpen, Menu, X, Sparkles, Binary, LineChart, BookMarked } from "lucide-react";
 
 /**
  * 상단 헤더 네비게이션 컴포넌트
@@ -32,7 +32,21 @@ export default function Header() {
         </Link>
 
         {/* 2. PC 네비게이션 바 */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
+          <Link
+            href="/reading-log"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700"
+          >
+            <BookMarked className="h-4 w-4" />
+            독서기록장
+          </Link>
+          <Link
+            href="/quadratic"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-600"
+          >
+            <LineChart className="h-4 w-4 text-blue-600" />
+            이차함수 그래프
+          </Link>
           <Link
             href="/sieve"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-600"
@@ -40,29 +54,16 @@ export default function Header() {
             <Binary className="h-4 w-4 text-blue-600" />
             에라토스테네스의 체
           </Link>
-          <Link
-            href="/quadratic"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700"
-          >
-            <LineChart className="h-4 w-4" />
-            이차함수 그래프
-          </Link>
-          <a
-            href="/#features"
-            className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
-          >
-            소개
-          </a>
         </nav>
 
-        {/* 3. 우측 액션 버튼 (시작하기) */}
+        {/* 3. 우측 액션 버튼 */}
         <div className="hidden md:flex md:items-center md:gap-3">
           <Link
-            href="/quadratic"
+            href="/reading-log"
             className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md active:scale-95"
           >
             <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-            그래프 실험실
+            독서기록장 작성
           </Link>
         </div>
 
@@ -88,6 +89,20 @@ export default function Header() {
         <div className="border-b border-gray-200/80 bg-white/95 px-6 py-4 backdrop-blur-lg md:hidden">
           <nav className="flex flex-col gap-4">
             <Link
+              href="/reading-log"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-sm font-bold text-blue-600 hover:text-blue-700"
+            >
+              📚 독서기록장 (Supabase DB)
+            </Link>
+            <Link
+              href="/quadratic"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-sm font-bold text-slate-700 hover:text-blue-600"
+            >
+              📈 이차함수 그래프
+            </Link>
+            <Link
               href="/sieve"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-sm font-bold text-slate-700 hover:text-blue-600"
@@ -95,18 +110,11 @@ export default function Header() {
               🧪 에라토스테네스의 체
             </Link>
             <Link
-              href="/quadratic"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-sm font-bold text-blue-600 hover:text-blue-700"
-            >
-              📈 이차함수 그래프
-            </Link>
-            <Link
-              href="/quadratic"
+              href="/reading-log"
               onClick={() => setIsMobileMenuOpen(false)}
               className="mt-2 w-full rounded-full bg-blue-600 py-3 text-center text-xs font-semibold text-white shadow-sm"
             >
-              그래프 실험실 진입하기
+              독서기록장 바로가기
             </Link>
           </nav>
         </div>
